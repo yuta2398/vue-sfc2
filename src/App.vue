@@ -1,16 +1,31 @@
 <template>
+<div>
   <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <HelloWorld
+:msg="title"
+:count="num"
+@child-event="parentEvent" />
+</div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref} from 'vue';
 import HelloWorld from './components/HelloWorld.vue';
+// import CopyDocs from './components/CopyDocs.vue';
+// import RefLinks from './components/RefLinks.vue';
 
 export default defineComponent({
   name: 'App',
   components: {
-    HelloWorld
+    HelloWorld,
+  },
+  setup() {
+      const title = ref('Welcome to Your Vue.js + TypeScript App')
+      const num = ref(0)
+      const parentEvent = (newVal: number)=>{
+          num.value = newVal
+      }
+    return { title,num,parentEvent}
   }
 });
 </script>
